@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 const validLogin = (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    return res.status(401).json({ message: 'Username or password invalid' });
+    return res.status(400).json({ message: 'All fields must be filled' });
   }
 
   next();
@@ -22,7 +22,7 @@ const validEmail = (req: Request, res: Response, next: NextFunction) => {
   //   console.log(email);
   const emailRegex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
   if (!emailRegex.test(email)) {
-    return res.status(400).json({ message: 'All fields must be filled' });
+    return res.status(401).json({ message: 'Invalid email or password' });
   }
 
   next();
@@ -30,7 +30,7 @@ const validEmail = (req: Request, res: Response, next: NextFunction) => {
 const validPassword = (req: Request, res: Response, next: NextFunction) => {
   const { password } = req.body;
   if (password.length < 6) {
-    return res.status(400).json({ message: 'All fields must be filled' });
+    return res.status(401).json({ message: 'Invalid email or password' });
   }
 
   next();

@@ -16,7 +16,7 @@ Users.init({
     primaryKey: true,
     autoIncrement: true,
   },
-  teamName: {
+  username: {
     type: STRING(100),
     allowNull: false,
   },

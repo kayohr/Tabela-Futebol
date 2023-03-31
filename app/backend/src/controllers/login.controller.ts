@@ -2,7 +2,7 @@ import * as bcrypt from 'bcryptjs';
 import { Request, Response } from 'express';
 import createToken from '../auth/authToken';
 import Users from '../database/models/Users';
-import loginService from '../services/login.services';
+import loginService, { verifyUSer } from '../services/login.services';
 
 const login = async (req: Request, res: Response) => {
   try {
@@ -24,6 +24,23 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
+const loginUser = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.body.user.payload;
+    const userLogin = await verifyUSer(id);
+
+    if (!userLogin) {
+      return res.status(401).json(
+        { message: 'Token must be a valid token!' },
+      );
+    }
+
+    return res.status(200).json({ role: userLogin.role });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export default {
-  login,
+  login, loginUser,
 };

@@ -1,5 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 
+import * as jwt from 'jsonwebtoken';
+
+// import jwtToken from '../interfaces/validTokenLogin';
+// import createToken from '../auth/authToken';
+
 const validLogin = (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -36,12 +41,33 @@ const validPassword = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
+const validToken = (req: Request, res: Response, next: NextFunction) => {
+  const { authorization } = req.headers;
+  const portToken = process.env.JWT_SECRET || 'secret';
+
+  try {
+    if (!authorization) {
+      return res.status(401).json({ message: 'Token not found' });
+    }
+    const payload = jwt.verify(authorization, portToken);
+    console.log(payload);
+    req.body.user = payload;
+
+    return next();
+  } catch (err: any) {
+    err.statusCode = 401;
+    return res.status(401).json({ message: 'Token must be a valid token' });
+  }
+
+  next();
+};
+
 // const loginValid = (req: Request, res: Response, next: NextFunction) => [
 //   validEmail(req, res, next),
 //   validPassword(req, res, next),
 //   validLogin(req, res, next),
 // ];
-export { validEmail, validPassword, validLogin };
+export { validEmail, validPassword, validLogin, validToken };
 
 // const validLogin = (req, res, next) => {
 //     const { email, password } = req.body;

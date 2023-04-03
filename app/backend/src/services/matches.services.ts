@@ -8,10 +8,21 @@ const getVerifyMatches = async () => {
       { model: Teams, as: 'awayTeam', attributes: ['teamName'] },
     ],
   });
-  console.log(matches, 'service');
 
   return matches;
 };
 
-const matchesServices = { getVerifyMatches };
+const getVerifyMatchesInProgress = async (inProgress: any) => {
+  const progress = inProgress === 'true';
+  const matchesInProgress = await Matches.findAll({
+    include: [
+      { model: Teams, as: 'homeTeam', attributes: ['teamName'] },
+      { model: Teams, as: 'awayTeam', attributes: ['teamName'] },
+    ],
+    where: { inProgress: progress } });
+
+  return matchesInProgress;
+};
+
+const matchesServices = { getVerifyMatches, getVerifyMatchesInProgress };
 export default matchesServices;

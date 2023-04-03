@@ -34,5 +34,20 @@ const getVerifyMatchesFinish = async (id:number) => {
   });
 };
 
-const matchesServices = { getVerifyMatches, getVerifyMatchesInProgress, getVerifyMatchesFinish };
+const getVerifyMatchesGoals = async (id:number, homeTeamGoals:number, awayTeamGoals:number) => {
+  const test = await Matches.update({ homeTeamGoals, awayTeamGoals, inProgress: true }, {
+    where: {
+      id,
+    },
+  });
+
+  // console.log(test);
+
+  return test;
+};
+
+const matchesServices = { getVerifyMatches,
+  getVerifyMatchesInProgress,
+  getVerifyMatchesFinish,
+  getVerifyMatchesGoals };
 export default matchesServices;

@@ -30,5 +30,22 @@ const matchesFinish = async (req: Request, res: Response) => {
     console.log(e);
   }
 };
-const matchesController = { matchesInProgress, matchesFinish };
+
+const matchesProgress = async (req: Request, res: Response) => {
+  try {
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+
+    const { id } = req.params;
+    const matchesIsProgress = await matchesServices.getVerifyMatchesGoals(
+      +id,
+      +homeTeamGoals,
+      +awayTeamGoals,
+    );
+
+    return res.status(200).json(matchesIsProgress);
+  } catch (e) {
+    console.log(e);
+  }
+};
+const matchesController = { matchesInProgress, matchesFinish, matchesProgress };
 export default matchesController;

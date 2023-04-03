@@ -23,7 +23,7 @@ module.exports = {
           key: 'id',
         }
       },
-      homeTeamsGoals: {
+      homeTeamGoals: {
         type: Sequelize.INTEGER,
         allowNull: false,
         field: 'home_team_goals'
@@ -60,7 +60,7 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('matchers');
+    await queryInterface.dropTable('matches');
   },
 };
 

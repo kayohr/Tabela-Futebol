@@ -24,5 +24,15 @@ const getVerifyMatchesInProgress = async (inProgress: any) => {
   return matchesInProgress;
 };
 
-const matchesServices = { getVerifyMatches, getVerifyMatchesInProgress };
+const getVerifyMatchesFinish = async (id:number) => {
+  // const progress = inProgress === 'false';
+
+  await Matches.update({ inProgress: false }, {
+    where: {
+      id,
+    },
+  });
+};
+
+const matchesServices = { getVerifyMatches, getVerifyMatchesInProgress, getVerifyMatchesFinish };
 export default matchesServices;

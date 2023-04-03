@@ -1,20 +1,9 @@
 import { Request, Response } from 'express';
 import matchesServices from '../services/matches.services';
 
-// const matches = async (req: Request, res: Response) => {
-//   try {
-//     const teams = await matchesServices.getVerifyMatches();
-
-//     return res.status(200).json(teams);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
-
 const matchesInProgress = async (req: Request, res: Response) => {
   try {
     const { inProgress } = req.query;
-    console.log(inProgress);
 
     const matchesTeamsInProgress = await matchesServices.getVerifyMatchesInProgress(inProgress);
     if (inProgress) {
@@ -27,5 +16,19 @@ const matchesInProgress = async (req: Request, res: Response) => {
   }
 };
 
-const matchesController = { matchesInProgress };
+const matchesFinish = async (req: Request, res: Response) => {
+  try {
+    // const { inProgress } = req.query;
+
+    const { id } = req.params;
+    await matchesServices.getVerifyMatchesFinish(+id);
+
+    return res.status(200).json(
+      { message: 'Finished' },
+    );
+  } catch (e) {
+    console.log(e);
+  }
+};
+const matchesController = { matchesInProgress, matchesFinish };
 export default matchesController;

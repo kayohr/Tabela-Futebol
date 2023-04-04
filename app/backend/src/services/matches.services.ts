@@ -1,5 +1,6 @@
 import Matches from '../database/models/Matches';
 import Teams from '../database/models/Teams';
+import IMacthes from './interface.matches';
 
 const getVerifyMatches = async () => {
   const matches = await Matches.findAll({
@@ -46,8 +47,22 @@ const getVerifyMatchesGoals = async (id:number, homeTeamGoals:number, awayTeamGo
   return test;
 };
 
+const postVerifyMacthes = async (matches: IMacthes) => {
+  const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = matches;
+  const matchers = await Matches.create({ homeTeamId,
+    awayTeamId,
+    homeTeamGoals,
+    awayTeamGoals,
+    inProgress: true });
+  await Matches.findOne({ where: { id: homeTeamId } });
+  await Matches.findOne({ where: { id: awayTeamId } });
+
+  return matchers;
+};
+
 const matchesServices = { getVerifyMatches,
   getVerifyMatchesInProgress,
   getVerifyMatchesFinish,
-  getVerifyMatchesGoals };
+  getVerifyMatchesGoals,
+  postVerifyMacthes };
 export default matchesServices;

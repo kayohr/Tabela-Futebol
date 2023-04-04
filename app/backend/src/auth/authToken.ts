@@ -15,7 +15,7 @@ interface JWTPayload {
 
 export default function createToken(payload: JWTPayload) {
   const config: jwt.SignOptions = {
-    expiresIn: '3d',
+    expiresIn: '30d',
     algorithm: 'HS256',
   };
   const token = jwt.sign({ payload }, portToken, config);

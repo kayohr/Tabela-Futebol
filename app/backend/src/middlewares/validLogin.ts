@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 import * as jwt from 'jsonwebtoken';
+import Matches from '../database/models/Matches';
 
 // import jwtToken from '../interfaces/validTokenLogin';
 // import createToken from '../auth/authToken';
@@ -62,12 +63,35 @@ const validToken = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
+const validTeam = async (req: Request, res: Response, next: NextFunction) => {
+  const { homeTeamId, awayTeamId } = req.body;
+  console.log(homeTeamId);
+
+  const teamHome = await Matches.findOne({ where: { id: homeTeamId } });
+  console.log(teamHome);
+
+  const teamAway = await Matches.findOne({ where: { id: awayTeamId } });
+
+  if (homeTeamId === awayTeamId) {
+    return res.status(422).json(
+      { message: 'It is not possible to create a match with two equal teams' },
+    );
+  } if (!teamHome || !teamAway) {
+    return res.status(404).json({ message: 'There is no team with such id!' });
+  }
+  // } if (!homeTeamId && !awayTeamId) {
+  //   return res.status(400).json({ message: 'team does not exist!' });
+  // }
+
+  next();
+};
+
 // const loginValid = (req: Request, res: Response, next: NextFunction) => [
 //   validEmail(req, res, next),
 //   validPassword(req, res, next),
 //   validLogin(req, res, next),
 // ];
-export { validEmail, validPassword, validLogin, validToken };
+export { validEmail, validPassword, validLogin, validToken, validTeam };
 
 // const validLogin = (req, res, next) => {
 //     const { email, password } = req.body;

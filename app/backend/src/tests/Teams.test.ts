@@ -77,35 +77,21 @@ describe('teams', () => {
           expect(chaiHttpResponse.body).to.deep.equal(teamsMock[0])
     
         });
+      
+      
+        it('...', async () => {
+          chaiHttpResponse = await chai
+             .request(app)
+             .get('/teams/1')
+      
+          expect(chaiHttpResponse.status).to.be.equal(200)
+          expect(chaiHttpResponse.body).to.deep.equal(teamsMock)
+    
+        });
     })
   
   });
-  describe(' users', () => {
-   
-    let chaiHttpResponse : Response ;
-  
-    before(async () => {
-      sinon
-        .stub(Users, "findOne")
-        .resolves(
-          users as any
-         );
-    });
-  
-    after(()=>{
-      (Users.findAll as sinon.SinonStub).restore();
-    })
-  
-    it('...', async () => {
-      chaiHttpResponse = await chai
-         .request(app)
-         .get('/login')
-  
-      expect(chaiHttpResponse.status).to.be.equal(200)
-      expect(chaiHttpResponse.body).to.deep.equal(users)
 
-    });
-})
 
 });
 

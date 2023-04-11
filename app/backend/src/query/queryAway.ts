@@ -1,12 +1,11 @@
 const leaderBoardAway = `SELECT 
 teams.team_name AS name,
-COUNT(*) AS totalGames,
 SUM(CASE
     WHEN  matches.away_team_goals > matches.home_team_goals THEN 3
     WHEN  matches.away_team_goals < matches.home_team_goals THEN 0
     ELSE 1
 END) AS totalPoints,
-
+COUNT(*) AS totalGames,
 SUM(matches.away_team_goals > matches.home_team_goals ) AS totalVictories,
 SUM(matches.away_team_goals = matches.home_team_goals) AS totalDraws,
 SUM(matches.away_team_goals < matches.home_team_goals) AS totalLosses,
@@ -29,8 +28,7 @@ GROUP BY name
 ORDER BY totalPoints DESC , 
 totalVictories DESC , 
 goalsBalance DESC , 
-goalsFavor DESC
-;
+goalsFavor DESC;
 `;
 
 export default leaderBoardAway;

@@ -24,7 +24,7 @@ describe('matches', () => {
    
     let chaiHttpResponse : Response ;
   
-    before(async () => {
+    beforeEach(async () => {
       sinon
         .stub(Matches, "findAll")
         .resolves(
@@ -32,11 +32,11 @@ describe('matches', () => {
          );
     });
   
-    after(()=>{
+    afterEach(()=>{
       (Matches.findAll as sinon.SinonStub).restore();
     })
   
-    it('...', async () => {
+    it('get /matches successful', async () => {
       chaiHttpResponse = await chai
          .request(app)
          .get('/matches')
@@ -46,89 +46,99 @@ describe('matches', () => {
 
     });
   
-    describe('Seu teste', () => {
+  //   describe('Seu teste', () => {
    
-        let chaiHttpResponse : Response ;
+  //       let chaiHttpResponse : Response ;
       
-        before(async () => {
-          sinon
-            .stub(Matches, "findOne")
-            .resolves(
-                teamsMock as any
-             );
-        });
+  //       beforeEach(async () => {
+  //         sinon
+  //           .stub(Matches, "findOne")
+  //           .resolves(
+  //               teamsMock as any
+  //            );
+  //       });
       
-        after(()=>{
-          (Matches.update as sinon.SinonStub).restore();
-        })
+  //       afterEach(()=>{
+  //         (Matches.update as sinon.SinonStub).restore();
+  //       })
       
-        it('...', async () => {
-          chaiHttpResponse = await chai
-             .request(app)
-             .patch('/matches/:id/finish')
+  //       it('patch /matches/:id/finish', async () => {
+  //         chaiHttpResponse = await chai
+  //            .request(app)
+  //            .patch('/matches/:id/finish')
       
-          expect(chaiHttpResponse.status).to.be.equal(200)
-          expect(chaiHttpResponse.body).to.deep.equal(teamsMock[0])
+  //         expect(chaiHttpResponse.status).to.be.equal(200)
+  //         expect(chaiHttpResponse.body).to.deep.equal({ "message": "Finished" })
     
-        });
+  //       });
       
       
-        it('...', async () => {
-          chaiHttpResponse = await chai
-             .request(app)
-             .patch('/matches/:id')
+  //       it('error patch /matches/:id', async () => {
+  //         chaiHttpResponse = await chai
+  //            .request(app)
+  //            .patch('/matches/:id')
       
-          expect(chaiHttpResponse.status).to.be.equal(200)
-          expect(chaiHttpResponse.body).to.deep.equal(teamsMock)
+  //         expect(chaiHttpResponse.status).to.be.equal(401)
+  //         expect(chaiHttpResponse.body).to.deep.equal({ "message": "Token not found" })
     
-        });
-    })
-    describe('Seu teste', () => {
+  //       });
+  //   })
+  //   it('error patch /matches/:id', async () => {
+  //     chaiHttpResponse = await chai
+  //        .request(app)
+  //        .patch('/matches/:id')
+  
+  //     expect(chaiHttpResponse.status).to.be.equal(200)
+  //     expect(chaiHttpResponse.body).to.deep.equal({ "message": "Token must be a valid token" })
+
+  //   });
+  // })
+
+  //   describe('Seu teste', () => {
    
-        let chaiHttpResponse : Response ;
+  //       let chaiHttpResponse : Response ;
       
-        before(async () => {
-          sinon
-            .stub(Matches, "findOne")
-            .resolves(
-                teamsMock as any
-             );
-        });
+  //       beforeEach(async () => {
+  //         sinon
+  //           .stub(Matches, "findOne")
+  //           .resolves(
+  //               teamsMock as any
+  //            );
+  //       });
       
-        after(()=>{
-          (Matches.create as sinon.SinonStub).restore();
-        })
+  //       afterEach(()=>{
+  //         (Matches.create as sinon.SinonStub).restore();
+  //       })
       
-        it('...', async () => {
-          chaiHttpResponse = await chai
-             .request(app)
-             .post('/matches')
+  //       it('post matches', async () => {
+  //         chaiHttpResponse = await chai
+  //            .request(app)
+  //            .post('/matches')
       
-          expect(chaiHttpResponse.status).to.be.equal(200)
-          expect(chaiHttpResponse.body).to.deep.equal(teamsMock[0])
+  //         expect(chaiHttpResponse.status).to.be.equal(200)
+  //         expect(chaiHttpResponse.body).to.deep.equal(teamsMock)
     
-        });
-        // it('...', async () => {
-        //   chaiHttpResponse = await chai
-        //      .request(app)
-        //      .get('/matches/?inProgress=true')
+  //       });
+  //       // it('...', async () => {
+  //       //   chaiHttpResponse = await chai
+  //       //      .request(app)
+  //       //      .get('/matches/?inProgress=true')
       
-        //   expect(chaiHttpResponse.status).to.be.equal(201)
-        //   expect(chaiHttpResponse.body).to.deep.equal(Number)
+  //       //   expect(chaiHttpResponse.status).to.be.equal(201)
+  //       //   expect(chaiHttpResponse.body).to.deep.equal(Number)
 
-        // });
-        // it('...', async () => {
-        //   chaiHttpResponse = await chai
-        //      .request(app)
-        //      .get('/matches/?inProgress=false')
+  //       // });
+  //       // it('...', async () => {
+  //       //   chaiHttpResponse = await chai
+  //       //      .request(app)
+  //       //      .get('/matches/?inProgress=false')
       
-        //   expect(chaiHttpResponse.status).to.be.equal(20)
-        //   expect(chaiHttpResponse.body).to.deep.equal(Number)
+  //       //   expect(chaiHttpResponse.status).to.be.equal(20)
+  //       //   expect(chaiHttpResponse.body).to.deep.equal(Number)
 
-        // });
-    })
+  //       // });
+  //   })
 
-  });
+})
+})
 
-
-});

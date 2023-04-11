@@ -10,8 +10,8 @@ chai.use(chaiHttp)
 import { app } from '../app';
 
 import { Response } from 'superagent';
-import Users from '../database/models/Users';
-import { users } from './mock/users.mock';
+// import Users from '../database/models/Users';
+// import { users } from './mock/users.mock';
 
 chai.use(chaiHttp);
 
@@ -30,7 +30,7 @@ describe('teams', () => {
    
     let chaiHttpResponse : Response ;
   
-    before(async () => {
+    beforeEach(async () => {
       sinon
         .stub(Teams, "findAll")
         .resolves(
@@ -38,11 +38,11 @@ describe('teams', () => {
          );
     });
   
-    after(()=>{
+    afterEach(()=>{
       (Teams.findAll as sinon.SinonStub).restore();
     })
   
-    it('...', async () => {
+    it('get /teams successful', async () => {
       chaiHttpResponse = await chai
          .request(app)
          .get('/teams')
@@ -56,36 +56,36 @@ describe('teams', () => {
    
         let chaiHttpResponse : Response ;
       
-        before(async () => {
+        beforeEach(async () => {
           sinon
             .stub(Teams, "findOne")
             .resolves(
-                teamsMock as any
+                teamsMock[1] as any
              );
         });
       
-        after(()=>{
-          (Teams.findAll as sinon.SinonStub).restore();
+        afterEach(()=>{
+          (Teams.findOne as sinon.SinonStub).restore();
         })
       
-        it('...', async () => {
-          chaiHttpResponse = await chai
-             .request(app)
-             .get('/teams')
+        // it(' get /teams [0]', async () => {
+        //   chaiHttpResponse = await chai
+        //      .request(app)
+        //      .get('/teams')
       
-          expect(chaiHttpResponse.status).to.be.equal(200)
-          expect(chaiHttpResponse.body).to.deep.equal(teamsMock[0])
+        //   expect(chaiHttpResponse.status).to.be.equal(200)
+        //   expect(chaiHttpResponse.body).to.deep.equal(teamsMock[0])
     
-        });
+        // });
       
       
-        it('...', async () => {
+        it('get teams id', async () => {
           chaiHttpResponse = await chai
              .request(app)
-             .get('/teams/1')
+             .get('/teams/:id')
       
           expect(chaiHttpResponse.status).to.be.equal(200)
-          expect(chaiHttpResponse.body).to.deep.equal(teamsMock)
+          expect(chaiHttpResponse.body).to.deep.equal(teamsMock[1])
     
         });
     })

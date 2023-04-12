@@ -52,47 +52,47 @@ describe('teams', () => {
 
     });
   
-    describe('Seu teste', () => {
-   
-        let chaiHttpResponse : Response ;
-      
-        beforeEach(async () => {
-          sinon
-            .stub(Teams, "findOne")
-            .resolves(
-                teamsMock[1] as any
-             );
-        });
-      
-        afterEach(()=>{
-          (Teams.findOne as sinon.SinonStub).restore();
-        })
-      
-        // it(' get /teams [0]', async () => {
-        //   chaiHttpResponse = await chai
-        //      .request(app)
-        //      .get('/teams')
-      
-        //   expect(chaiHttpResponse.status).to.be.equal(200)
-        //   expect(chaiHttpResponse.body).to.deep.equal(teamsMock[0])
     
-        // });
-      
-      
-        it('get teams id', async () => {
-          chaiHttpResponse = await chai
-             .request(app)
-             .get('/teams/:id')
-      
-          expect(chaiHttpResponse.status).to.be.equal(200)
-          expect(chaiHttpResponse.body).to.deep.equal(teamsMock[1])
     
-        });
+  });
+  
+  
+  
+});
+describe('Seu teste', () => {
+
+    let chaiHttpResponse : Response ;
+  
+    beforeEach(async () => {
+      sinon
+        .stub(Teams, "findOne")
+        .resolves(
+            teamsMock[1] as any
+         );
+    });
+  
+    afterEach(()=>{
+      (Teams.findOne as sinon.SinonStub).restore();
     })
   
-  });
-
-
-});
-
+    // it(' get /teams [0]', async () => {
+    //   chaiHttpResponse = await chai
+    //      .request(app)
+    //      .get('/teams')
   
+    //   expect(chaiHttpResponse.status).to.be.equal(200)
+    //   expect(chaiHttpResponse.body).to.deep.equal(teamsMock)
+
+    // });
+  
+  
+    it('get teams id', async () => {
+      chaiHttpResponse = await chai
+         .request(app)
+         .get('/teams/:id')
+  
+      expect(chaiHttpResponse.status).to.be.equal(200)
+      expect(chaiHttpResponse.body).to.deep.equal(teamsMock[1])
+
+    });
+})

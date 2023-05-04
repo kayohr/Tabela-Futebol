@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/tabela-futebol/static/css/main.91f4a030.chunk.css",
+    "main.js": "/tabela-futebol/static/js/main.1f34c6a0.chunk.js",
+    "main.js.map": "/tabela-futebol/static/js/main.1f34c6a0.chunk.js.map",
+    "runtime-main.js": "/tabela-futebol/static/js/runtime-main.f7d50baf.js",
+    "runtime-main.js.map": "/tabela-futebol/static/js/runtime-main.f7d50baf.js.map",
+    "static/js/2.bf0b9f98.chunk.js": "/tabela-futebol/static/js/2.bf0b9f98.chunk.js",
+    "static/js/2.bf0b9f98.chunk.js.map": "/tabela-futebol/static/js/2.bf0b9f98.chunk.js.map",
+    "index.html": "/tabela-futebol/index.html",
+    "static/css/main.91f4a030.chunk.css.map": "/tabela-futebol/static/css/main.91f4a030.chunk.css.map",
+    "static/js/2.bf0b9f98.chunk.js.LICENSE.txt": "/tabela-futebol/static/js/2.bf0b9f98.chunk.js.LICENSE.txt",
+    "static/media/negative_logo.29805c2a.png": "/tabela-futebol/static/media/negative_logo.29805c2a.png",
+    "static/media/positive_logo.4a6f1733.png": "/tabela-futebol/static/media/positive_logo.4a6f1733.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f7d50baf.js",
+    "static/js/2.bf0b9f98.chunk.js",
+    "static/css/main.91f4a030.chunk.css",
+    "static/js/main.1f34c6a0.chunk.js"
+  ]
+}
